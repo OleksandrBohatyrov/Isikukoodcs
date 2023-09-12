@@ -14,12 +14,20 @@ namespace Isikukood
 
             while (true)
             {
-                Console.WriteLine("Sisestage ID-kood (11-kohaline) või väljumiseks \"q\": ");
-                string input = Console.ReadLine().Trim();
+                Console.WriteLine("Sisestage ID-kood (11-kohaline) või väljumiseks : ");
+                string input = Console.ReadLine();   
 
                 if (input.ToLower() == "q")
                     break;
-
+                else if (input.ToLower() == "rand")
+                {
+                    IdCode id = new IdCode("");
+                    id.GenerateIsic();
+                    Console.WriteLine($"Sünniaasta: {id.GetFullYear()}");
+                    Console.WriteLine($"Sünniaeg: {id.GetBirthDate():dd.MM.yyyy}");
+                    Console.WriteLine($"Paul: {id.GetGender()}");
+                }
+                
                 if (IdCode.IsValidIdCode(input))
                 {
                     IdCode id = new IdCode(input);

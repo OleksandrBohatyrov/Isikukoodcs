@@ -8,12 +8,14 @@ namespace Isikukood
 {
     public class IdCode
     {
-        private readonly string _idCode;
+        private string _idCode;
 
         public IdCode(string idCode)
         {
             _idCode = idCode;
         }
+
+
 
         public static bool IsValidIdCode(string idCode)
         {
@@ -163,10 +165,11 @@ namespace Isikukood
 
         public DateOnly GetBirthDate()
         {
-            int day = GetDay();
             int month = GetMonth();
+            int day = GetDay();
+ 
             int year = GetFullYear();
-            return new DateOnly(year, month, day);
+            return new DateOnly(year, day, month);
         }
 
         public string GetGender()
@@ -190,6 +193,47 @@ namespace Isikukood
                 }
             }
             return true;
+        }
+
+
+        public void GenerateIsic()
+        {
+            Random random = new Random();
+
+
+            //Генерация гендера
+            int gender = random.Next(1, 7);
+
+
+            int year = random.Next(1800, DateTime.Now.Year + 1);
+            int lastTwoDigitsOfYear = year % 100;
+            string yearString = lastTwoDigitsOfYear.ToString("00");
+
+
+            int month = random.Next(1, 13);
+            string monthString = month.ToString("00");
+
+            // Генерация дня (шестая и седьмая цифры)
+            int maxDaysInMonth;
+            if (month == 2 && IsLeapYear(year))
+            {
+                maxDaysInMonth = 29; // Высокосный год
+            }
+            else
+            {
+                maxDaysInMonth = DateTime.DaysInMonth(year, month);
+            }
+            int day = random.Next(1, maxDaysInMonth + 1);
+            string dayString = day.ToString("00");
+
+
+            // Генерируем 4 случайных числа (4 цифры)
+            string randomDigits = random.Next(1000, 10000).ToString();
+
+            // Собираем итоговый Isikukood
+            _idCode = $"{gender}{yearString}{dayString}{monthString}{randomDigits}";
+            Console.WriteLine(_idCode);
+
         }
     }
 
