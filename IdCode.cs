@@ -14,7 +14,7 @@ namespace Isikukood
         {
             _idCode = idCode;
         }
-
+        public string IDcode { get => _idCode; }
 
 
         public static bool IsValidIdCode(string idCode)
@@ -137,6 +137,73 @@ namespace Isikukood
             return total;
         }
 
+        public static string Haiglakoht(IdCode idCodeObject)
+        {
+            string idCode = idCodeObject.IDcode;
+
+            if (idCode.Length >= 10)
+            {
+                string tahed8910 = idCode.Substring(7, 3); // Get the 8th, 9th, and 10th digits
+
+                if (int.TryParse(tahed8910, out int t))
+                {
+                    if (1 <= t && t <= 10)
+                    {
+                        return "Kuressaare Haigla";
+                    }
+                    else if (11 <= t && t <= 18)
+                    {
+                        return "Tartu Ülikooli Naistekliinik";
+                    }
+                    else if (21 <= t && t <= 220)
+                    {
+                        return "Ida-Tallinna Keskhaigla";
+                    }
+                    else if (221 <= t && t <= 270)
+                    {
+                        return "Ida-Viru Keskhaigla";
+                    }
+                    else if (271 <= t && t <= 370)
+                    {
+                        return "Maarjamõisa Kliinikum";
+                    }
+                    else if (371 <= t && t <= 420)
+                    {
+                        return "Narva Haigla";
+                    }
+                    else if (421 <= t && t <= 470)
+                    {
+                        return "Pärnu Haigla";
+                    }
+                    else if (471 <= t && t <= 490)
+                    {
+                        return "Pelgulinna Sünnitusmaja";
+                    }
+                    else if (491 <= t && t <= 520)
+                    {
+                        return "Järvamaa Haigla";
+                    }
+                    else if (521 <= t && t <= 570)
+                    {
+                        return "Rakvere, Tapa haigla";
+                    }
+                    else if (571 <= t && t <= 600)
+                    {
+                        return "Valga Haigla";
+                    }
+                    else if (601 <= t && t <= 650)
+                    {
+                        return "Viljandi Haigla";
+                    }
+                    else if (651 <= t && t <= 700)
+                    {
+                        return "Lõuna-Eesti Haigla";
+                    }
+                }
+            }
+            return "Välismaa Haigla";
+        }
+
         private bool IsValidControlNumber()
         {
             int controlNumber = Convert.ToInt32(_idCode[^1..]);
@@ -165,9 +232,12 @@ namespace Isikukood
 
         public DateOnly GetBirthDate()
         {
-            int month = GetMonth();
+
+           
             int day = GetDay();
- 
+            int month = GetMonth();
+
+
             int year = GetFullYear();
             return new DateOnly(year, day, month);
         }

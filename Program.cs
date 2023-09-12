@@ -14,7 +14,7 @@ namespace Isikukood
 
             while (true)
             {
-                Console.WriteLine("Sisestage ID-kood (11-kohaline) või väljumiseks : ");
+                Console.WriteLine("Sisestage ID-kood (11-kohaline) või väljumiseks: \nq-Lõpeta\nrand-random ");
                 string input = Console.ReadLine();   
 
                 if (input.ToLower() == "q")
@@ -26,6 +26,8 @@ namespace Isikukood
                     Console.WriteLine($"Sünniaasta: {id.GetFullYear()}");
                     Console.WriteLine($"Sünniaeg: {id.GetBirthDate():dd.MM.yyyy}");
                     Console.WriteLine($"Paul: {id.GetGender()}");
+                    string haigla = IdCode.Haiglakoht(id);
+                    Console.WriteLine($"Haigla: {haigla}");
                 }
                 
                 if (IdCode.IsValidIdCode(input))
@@ -34,6 +36,8 @@ namespace Isikukood
                     Console.WriteLine($"Sünniaasta: {id.GetFullYear()}");
                     Console.WriteLine($"Sünniaeg: {id.GetBirthDate():dd.MM.yyyy}");
                     Console.WriteLine($"Paul: {id.GetGender()}");
+                    string haigla = IdCode.Haiglakoht(id);
+                    Console.WriteLine($"Haigla: {haigla}");
                 }
                 else
                 {
