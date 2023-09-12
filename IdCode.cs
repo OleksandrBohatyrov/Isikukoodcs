@@ -143,7 +143,7 @@ namespace Isikukood
 
             if (idCode.Length >= 10)
             {
-                string tahed8910 = idCode.Substring(7, 3); // Get the 8th, 9th, and 10th digits
+                string tahed8910 = idCode.Substring(7, 3); // Берем 8, 9 и 10 числа в коде
 
                 if (int.TryParse(tahed8910, out int t))
                 {
