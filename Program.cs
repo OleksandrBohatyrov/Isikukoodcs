@@ -18,7 +18,7 @@ namespace Isikukood
                 string input = Console.ReadLine();   
 
                 if (input.ToLower() == "q")
-                    Environment.Exit(1);
+                    break;
                 else if (input.ToLower() == "rand")
                 {
                     IdCode id = new IdCode("");

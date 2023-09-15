@@ -297,13 +297,14 @@ namespace Isikukood
             string dayString = day.ToString("00");
 
 
-            // Генерируем 4 случайных числа (4 цифры)
+            // Генерируем 3 случайных числа (3 цифры)
             string randomDigits = random.Next(1000, 10000).ToString();
 
+
+           
             // Собираем итоговый Isikukood
             _idCode = $"{gender}{yearString}{dayString}{monthString}{randomDigits}";
             Console.WriteLine(_idCode);
-
         }
     }
 
